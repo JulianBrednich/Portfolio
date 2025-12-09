@@ -28,10 +28,10 @@ The tool:
 
 ---
 
-<details>
+<details markdown="1">
 <summary><strong>Show code snippet</strong></summary>
 
-<br>
+```python
 
     # Get the matrix from the point attribute
     pt = xform_geo.iterPoints()[0]
@@ -111,3 +111,5 @@ The tool:
     light.parm("light_texture").set(texture_path)
 
 </details>
+```
+
