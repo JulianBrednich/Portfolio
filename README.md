@@ -25,7 +25,7 @@ The tool:
 ---
 
 <details>
-<summary><strong>Show Full Code Snippet</strong></summary>
+<summary><strong>Show code snippet</strong></summary>
 
   
 ```python
@@ -55,21 +55,22 @@ else:
 
 euler_deg = [math.degrees(a) for a in (roll, pitch, yaw)]
 
+    
 
 # Get bounding box and center
 bbox = grid_geo.boundingBox()
 center = bbox.center()
 size_x = bbox.sizevec()[0]
 size_y = bbox.sizevec()[1]
-
 # Get all point positions
 points = grid_geo.points()
-
+# Calculate vectors along local axes
 # Typical grid point order: bottom-left, bottom-right, top-right, top-left
 p0 = points[0].position()
 p1 = points[1].position()
 p2 = points[2].position()
 p3 = points[3].position()
+
 
 x_vec = p1 - p0  # Local X axis
 y_vec = p2 - p0  # Local Y axis
@@ -78,15 +79,19 @@ size_x = x_vec.length()
 size_y = y_vec.length()
 
 
-# Render textures
+
+
+#render textures
 rot_x = euler_deg[0]
 if abs(rot_x) > 90:
     flip.bypass(False)
+    
 
 toCopsNode.cook(force=True)
 cop_node.cook(force=True)
 
 rop.parm("copoutput").set(texture_path)
+
 rop.render()
 
 flip.bypass(True)
@@ -95,6 +100,9 @@ if iteration == 0:
     env_texture_path = f"{version_path}/Environment.exr"
     rop_env.parm("copoutput").set(env_texture_path)
     rop_env.render()
+    
+
+
 
 
 # Create the area light
@@ -108,5 +116,5 @@ light.parm("area_sizey").set(size_y)
 light.parm("light_intensity").set(1.0)
 light.parm("light_enable").set(True)
 
-# Set textures
+#set textures
 light.parm("light_texture").set(texture_path)
