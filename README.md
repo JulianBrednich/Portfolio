@@ -5,22 +5,29 @@ The tool analyzes LiDAR-based geometry, extracts local orientation, computes lig
 
 ---
 
-##Demo Video
+##  Demo Video  
 [![Light Rig Demo](thumbnail.png)](https://vimeo.com/1144911549?share=copy&fl=sv&fe=ci)
 
-## Summary of How It Works
+---
+
+##  Summary of How It Works
+
 The tool:
--Projects the HDRI onto the LiDAR geometry
--finds the light sources based on a luminance threshold defined by the artist
--deletes all geometry from the LiDAR geometry, that is not part of the light sources
--creates Grid Geometries that represent Area Lights
--Extracts a 3x3 transform matrix, converts it into Euler rotations and computes the lights dimentions from the bounding boxes
--renders automatically extracted emisson maps from the projected texture using COPs
--Creates light nodes with assigned baked textures
 
+- Projects the HDRI onto the LiDAR geometry  
+- Finds light sources based on an artist-defined luminance threshold  
+- Deletes all geometry that is not part of the detected light sources  
+- Creates grid geometries representing area lights  
+- Extracts a 3×3 transform matrix, converts it into Euler rotations, and computes the light dimensions from the bounding boxes  
+- Automatically renders emission maps using COPs based on the projected texture  
+- Creates light nodes with the correct transform, size, and baked textures  
 
-<summary><strong>Show code snippet</strong></summary>
+---
 
+<details>
+<summary><strong>Show Full Code Snippet</strong></summary>
+
+  
 ```python
 # Get the matrix from the point attribute
 pt = xform_geo.iterPoints()[0]
@@ -48,22 +55,21 @@ else:
 
 euler_deg = [math.degrees(a) for a in (roll, pitch, yaw)]
 
-    
 
 # Get bounding box and center
 bbox = grid_geo.boundingBox()
 center = bbox.center()
 size_x = bbox.sizevec()[0]
 size_y = bbox.sizevec()[1]
+
 # Get all point positions
 points = grid_geo.points()
-# Calculate vectors along local axes
+
 # Typical grid point order: bottom-left, bottom-right, top-right, top-left
 p0 = points[0].position()
 p1 = points[1].position()
 p2 = points[2].position()
 p3 = points[3].position()
-
 
 x_vec = p1 - p0  # Local X axis
 y_vec = p2 - p0  # Local Y axis
@@ -72,19 +78,15 @@ size_x = x_vec.length()
 size_y = y_vec.length()
 
 
-
-
-#render textures
+# Render textures
 rot_x = euler_deg[0]
 if abs(rot_x) > 90:
     flip.bypass(False)
-    
 
 toCopsNode.cook(force=True)
 cop_node.cook(force=True)
 
 rop.parm("copoutput").set(texture_path)
-
 rop.render()
 
 flip.bypass(True)
@@ -93,9 +95,6 @@ if iteration == 0:
     env_texture_path = f"{version_path}/Environment.exr"
     rop_env.parm("copoutput").set(env_texture_path)
     rop_env.render()
-    
-
-
 
 
 # Create the area light
@@ -109,6 +108,5 @@ light.parm("area_sizey").set(size_y)
 light.parm("light_intensity").set(1.0)
 light.parm("light_enable").set(True)
 
-#set textures
+# Set textures
 light.parm("light_texture").set(texture_path)
-
