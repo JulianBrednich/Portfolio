@@ -18,7 +18,7 @@ The tool:
 -renders automatically extracted emisson maps from the projected texture using COPs
 -Creates light nodes with assigned baked textures
 
-<details>
+
 <summary><strong>Show code snippet</strong></summary>
 
 ```python
