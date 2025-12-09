@@ -29,14 +29,10 @@ The tool:
 ---
 
 <details>
-
-<summary><strong>Show Full Code Snippet</strong></summary>
+<summary><strong>Show code snippet</strong></summary>
 
 <br>
 
-{% raw %}
-    
-    ```python
     # Get the matrix from the point attribute
     pt = xform_geo.iterPoints()[0]
     matrix_vals = pt.attribValue("transform")  # 9 floats
@@ -113,7 +109,5 @@ The tool:
 
     # Set textures
     light.parm("light_texture").set(texture_path)
-    ```
-{% endraw %}
 
 </details>
