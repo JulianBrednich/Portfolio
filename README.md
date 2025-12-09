@@ -6,7 +6,7 @@ The tool analyzes LiDAR-based geometry, extracts local orientation, computes lig
 ---
 
 ##Demo Video
-![Light Rig Demo](thumbnail.png)](https://vimeo.com/1144911549?share=copy&fl=sv&fe=ci)
+[![Light Rig Demo](thumbnail.png)](https://vimeo.com/1144911549?share=copy&fl=sv&fe=ci)
 
 ## Summary of How It Works
 The tool:
@@ -21,6 +21,7 @@ The tool:
 <details>
 <summary><strong>Show code snippet</strong></summary>
 
+```python
 # Get the matrix from the point attribute
 pt = xform_geo.iterPoints()[0]
 matrix_vals = pt.attribValue("transform")  # 9 floats
@@ -110,4 +111,4 @@ light.parm("light_enable").set(True)
 
 #set textures
 light.parm("light_texture").set(texture_path)
-<details>
+
