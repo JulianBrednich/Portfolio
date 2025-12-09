@@ -1,12 +1,26 @@
-## Bachelor Thesis – Procedural Lighting Tool
+# Procedural Lighting Tool (Bachelor Thesis)
 
-A procedural tool that automatically creates light rigs from LiDAR scans and HDRIs, developed in Houdini using Python and VEX.
+A procedural tool developed in Houdini using Python and VEX that automatically generates area lights from LiDAR scans and HDRI data.  
+The tool analyzes LiDAR-based geometry, extracts local orientation, computes light dimensions, bakes texture projections, and constructs production-ready lights with correct transforms.
 
-###Demo
+---
+
+##Demo Video
 ![Light Rig Demo](thumbnail.png)](https://vimeo.com/1144911549?share=copy&fl=sv&fe=ci)
 
-### Code Snippet
-```python
+## Summary of How It Works
+The tool:
+-Projects the HDRI onto the LiDAR geometry
+-finds the light sources based on a luminance threshold defined by the artist
+-deletes all geometry from the LiDAR geometry, that is not part of the light sources
+-creates Grid Geometries that represent Area Lights
+-Extracts a 3x3 transform matrix, converts it into Euler rotations and computes the lights dimentions from the bounding boxes
+-renders automatically extracted emisson maps from the projected texture using COPs
+-Creates light nodes with assigned baked textures
+
+<details>
+<summary><strong>Show code snippet</strong></summary>
+
 # Get the matrix from the point attribute
 pt = xform_geo.iterPoints()[0]
 matrix_vals = pt.attribValue("transform")  # 9 floats
@@ -96,3 +110,4 @@ light.parm("light_enable").set(True)
 
 #set textures
 light.parm("light_texture").set(texture_path)
+<details>
