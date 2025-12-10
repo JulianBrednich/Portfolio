@@ -1,14 +1,10 @@
 ---
-title: VFX Reel
+title: VFX Portfolio Julian Brednich
 ---
 # VFX Reel
 [![VFX Reel](reel thumbnail.png)](https://vimeo.com/1133149897?share=copy&fl=sv&fe=ci)
 
-
 ---
-title: Procedural Lighting Tool
----
-
 # Procedural Lighting Tool (Bachelor Thesis)
 
 A procedural tool developed in Houdini using Python and VEX that automatically generates area lights from LiDAR scans and HDRI data.  
