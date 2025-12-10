@@ -112,9 +112,8 @@ The tool:
 
     # Set textures
     light.parm("light_texture").set(texture_path)
-
-</details>
 ```
+</details>
 
 ---
 
@@ -124,8 +123,9 @@ If you would like to get in touch:
 
 **Julian Brednich**  
 
- **mail:** *julian.brednich@gmail.com*
- **LinkedIn:** *https://www.linkedin.com/in/julian-brednich-32aaa8298?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BSl2zvCh%2BTGqH0EAgvzjnFw%3D%3D*
+ **mail:** julian.brednich@gmail.com
+ 
+ **LinkedIn:** https://www.linkedin.com/in/julian-brednich-32aaa8298?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BSl2zvCh%2BTGqH0EAgvzjnFw%3D%3D
 
 ---
 
