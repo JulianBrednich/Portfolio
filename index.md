@@ -120,15 +120,103 @@ The tool:
 # Nuke Skript sorter
 A tool that automatically cleans up and organizes Nuke node graphs. The tools straightens the primary B pipe, restructures all A-pipes into clean rectangular layouts, and inserts dot nodes where necessary to maintain clear and readable connections.  
 Special care is taken to correctly handle secondary B-pipes, ensuring that existing branching logic and node relationships are preserved.  
-The result is a significantly more readable node graph. It works best, if used regularly during comping to ensure a clean graph right from the start.
+The result is a significantly more readable node graph. It works best, if used regularly during comping to ensure a clean graph right from the start. The skript uses object orientation and a binary search tree to represent the node graph internally. It and iterates over the selected nodes using recursion.
 
 
 ## Demo
 ![Skript sorter Demo](skript sorter demo.gif)
 
+<details markdown="1">
+<summary><strong>Show code snippet</strong></summary>
+
+```python
+import nuke
+import sys
+SELECTED_NODES = ()
 
 
+class ScriptTermination(Exception):
+    pass
 
+
+class BSTNode:
+
+    def __init__(self, node=None, root=None, is_b=False):
+
+        self.val = node
+
+        self.root = root
+
+        self.is_b = is_b
+
+        if not self.is_b:
+            self.root = self.val
+
+        self.a = self.get_a()
+
+        self.b = self.get_b()
+
+        # self.printout()
+
+        # only sort selected node
+        for node in SELECTED_NODES:
+            if self.val == node:
+                self.sort()
+
+    def get_b(self):
+
+        if not self.is_selected(self.val):
+            return None
+
+        input_b = self.val.input(0)
+
+        if self.val.Class() == "ScanlineRender" or self.val.Class() == "ApplyMaterial":
+            input_b = self.val.input(1)
+
+        if self.b_is_on_the_side(input_b):
+            return None
+
+        # create child b
+        if input_b:
+            return BSTNode(input_b, self.root, True)
+
+        else:
+            return None
+
+    def get_a(self):
+        if not self.is_selected(self.val):
+            return None
+
+        if self.val.Class() == "ScanlineRender" or self.val.Class() == "ApplyMaterial":
+            b_index = 1
+        else:
+            b_index = 0
+
+        input_nodes = []
+        # Iterate over all possible inputs
+        for i in range(self.val.inputs()):
+            input_node = self.val.input(i)
+
+            if i is b_index:
+                if not self.b_is_on_the_side(input_node):
+                    input_node = None
+            input_nodes.append(input_node)
+
+        input_a = input_nodes
+        if input_a:
+            for i in range(len(input_a)):
+                node = input_a[i]
+
+            a_BTS_nodes = []
+            for a_child in input_a:
+                nextInputNode = BSTNode(a_child, self.root)
+                a_BTS_nodes.append(nextInputNode)
+            return a_BTS_nodes
+
+        return None
+
+```
+</details>
 # Contact
 
 If you would like to get in touch:
