@@ -129,7 +129,7 @@ The result is a significantly more readable node graph. It works best, if used r
 
 
 ## Demo
-![Skript sorter Demo](skript sorter demo.gif)
+![Skript sorter Demo](skript_sorter_demo.gif)
 
 <details markdown="1">
 <summary><strong>Show example code snippet (not full code)</strong></summary>
