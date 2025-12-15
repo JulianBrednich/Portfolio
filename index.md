@@ -32,7 +32,7 @@ The tool:
 ---
 
 <details markdown="1">
-<summary><strong>Show code snippet</strong></summary>
+<summary><strong>Show example code snippet (not full code)</strong></summary>
 
 ```python
 
@@ -112,6 +112,11 @@ The tool:
 
     # Set textures
     light.parm("light_texture").set(texture_path)
+
+
+...
+
+
 ```
 </details>
 
@@ -127,7 +132,7 @@ The result is a significantly more readable node graph. It works best, if used r
 ![Skript sorter Demo](skript sorter demo.gif)
 
 <details markdown="1">
-<summary><strong>Show code snippet</strong></summary>
+<summary><strong>Show example code snippet (not full code)</strong></summary>
 
 ```python
 import nuke
@@ -214,6 +219,10 @@ class BSTNode:
             return a_BTS_nodes
 
         return None
+
+
+...
+
 
 ```
 </details>
