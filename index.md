@@ -117,6 +117,18 @@ The tool:
 
 ---
 
+# Nuke Skript sorter
+A tool that automatically cleans up and organizes Nuke node graphs. The tools straightens the primary B pipe, restructures all A-pipes into clean rectangular layouts, and inserts dot nodes where necessary to maintain clear and readable connections.  
+Special care is taken to correctly handle secondary B-pipes, ensuring that existing branching logic and node relationships are preserved.  
+The result is a significantly more readable node graph. It works best, if used regularly during comping to ensure a clean graph right from the start.
+
+
+## Demo
+![Skript sorter Demo](skript sorter demo.gif)
+
+
+
+
 # Contact
 
 If you would like to get in touch:
