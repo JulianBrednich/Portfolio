@@ -2,7 +2,7 @@
 title: VFX Portfolio Julian Brednich
 ---
 # VFX Reel
-[![VFX Reel](reel thumbnail.png)](https://vimeo.com/1133149897?share=copy&fl=sv&fe=ci)
+[![VFX Reel](reel thumbnail.png)](https://vimeo.com/1133149897?fl=pl&fe=sh)
 
 ---
 # Procedural Lighting Tool (Bachelor Thesis)
