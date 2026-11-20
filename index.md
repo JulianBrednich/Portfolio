@@ -138,6 +138,38 @@ light.parm("light_texture").set(texture_path)
 
 </section>
 
+<section id="rice-terraces" markdown="1">
+
+<p class="eyebrow">Personal Project · Unreal Engine 5</p>
+
+## Procedural Rice Terraces
+
+<ul class="tags">
+  <li>Unreal Engine 5</li><li>Geometry Script</li><li>PCG</li><li>C++</li><li>Blueprints</li><li>Landmass</li><li>Materials</li>
+</ul>
+
+A procedural rice terrace generator in Unreal Engine 5. The terrain is shaped with a spline-based Landmass brush; from that landscape the tool detects the flat terrace fields and builds everything else on top of them: smoothed earth walls, flooded water surfaces, rice planted in rows that follow each field's contour, and a few palms and willows on the dry strips next to the walls. Moving the spline or changing a setting rebuilds the terraces live in the viewport.
+
+<figure class="media">
+  <video src="assets/video/rice-terraces-beauty.mp4" poster="assets/img/rice-terraces-beauty.jpg" autoplay muted loop playsinline></video>
+</figure>
+
+<figure class="media">
+  <video src="assets/video/rice-terraces-procedural.mp4" poster="assets/img/rice-terraces-procedural.jpg" autoplay muted loop playsinline controls></video>
+  <figcaption>Procedural controls</figcaption>
+</figure>
+
+### How it works
+
+1. **Landscape**: a Landmass spline brush shapes the terraced hillside. A small C++ function copies the landscape into a dynamic mesh for analysis.
+2. **Field detection**: Geometry Script keeps only triangles flatter than a maximum slope, removes small islands and splits the result into individual terrace fields.
+3. **Clean field outlines**: each field's boundary loop is smoothed with a moving average, simplified (Douglas-Peucker) and rounded with Chaikin subdivision, so the walls follow the terrace shape instead of the landscape grid.
+4. **Walls, water and rice**: a wall profile is swept along every outline, the water surface is triangulated from the same outline, and rice rows are placed inside the field at an adjustable row and plant spacing.
+5. **PCG scattering**: PCG spawns the rice as instanced meshes with per-plant colour variation, and places palms and willows only on flat ground a few metres from the water.
+6. **Live updates**: a custom C++ component listens for landscape changes and rebuilds the terraces automatically after the brush has been moved.
+
+</section>
+
 <section id="face-capture" markdown="1">
 
 <p class="eyebrow">No Notes Studio · Reference workflow for AI video</p>
@@ -153,22 +185,22 @@ A facial motion capture workflow that only needs a single camera. It was develop
 <div class="compare">
   <figure class="media">
     <video src="assets/video/sc86_3d_reference.mp4" poster="assets/img/sc86_3d_reference.jpg" autoplay muted loop playsinline></video>
-    <figcaption>3D reference – MetaHuman head in Blender, driven by the captured performance</figcaption>
+    <figcaption>3D reference: MetaHuman head in Blender, driven by the captured performance</figcaption>
   </figure>
   <figure class="media">
     <video src="assets/video/sc86_ai_result.mp4" poster="assets/img/sc86_ai_result.jpg" autoplay muted loop playsinline></video>
-    <figcaption>Final result – AI video generated with Seedance using the 3D render as reference</figcaption>
+    <figcaption>Final result: AI video generated with Seedance using the 3D render as reference</figcaption>
   </figure>
 </div>
 
 ### How it works
 
-1. **Tracking in ComfyUI** – a custom node pack (`comfyui-facelines`) tracks the actor's face with MediaPipe: 3D face landmarks, ARKit-style blendshapes and head pose, with smoothing, exposure normalization and frame conforming to 24 fps for Seedance.
-2. **Reference plates and emotion script** – the same graph renders face-line reference frames for Seedance and writes a time-coded emotion script that feeds into the prompt.
-3. **JSON export** – landmarks and blendshapes are exported as a JSON file.
-4. **Blender import** – a Python script I wrote reads the JSON and keys the ARKit shape keys and head transforms on a MetaHuman head in Blender.
-5. **3D render as reference** – the animated head is rendered in the blocked-out set and handed to Seedance as a video reference.
-6. **AI generation** – Seedance generates the final shot, following the performance, framing and timing of the 3D reference.
+1. **Tracking in ComfyUI**: a custom node pack (`comfyui-facelines`) tracks the actor's face with MediaPipe: 3D face landmarks, ARKit-style blendshapes and head pose, with smoothing, exposure normalization and frame conforming to 24 fps for Seedance.
+2. **Reference plates and emotion script**: the same graph renders face-line reference frames for Seedance and writes a time-coded emotion script that feeds into the prompt.
+3. **JSON export**: landmarks and blendshapes are exported as a JSON file.
+4. **Blender import**: a Python script I wrote reads the JSON and keys the ARKit shape keys and head transforms on a MetaHuman head in Blender.
+5. **3D render as reference**: the animated head is rendered in the blocked-out set and handed to Seedance as a video reference.
+6. **AI generation**: Seedance generates the final shot, following the performance, framing and timing of the 3D reference.
 
 <figure class="media">
   <img src="assets/img/facelines-workflow.jpg" alt="ComfyUI facelines workflow: Track → Render reference, Emotion script, Blender export">
