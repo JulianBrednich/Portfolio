@@ -10,4 +10,5 @@ kramdown:
 
 exclude:
   - README.md
+  - tools
   - "light creator demo.mp4"
