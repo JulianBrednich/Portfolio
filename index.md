@@ -7,7 +7,7 @@ title: Julian Brednich – VFX Portfolio
 
 # Julian Brednich
 
-<p class="tagline">Technical Artist with a focus on Houdini, Python, pipeline tools and 3D-to-AI workflows. Recent Audiovisual Media graduate (HdM Stuttgart), currently Technical Director at No Notes Studio.</p>
+<p class="tagline">Technical Artist with a focus on Houdini, Python, pipeline tools and 3D-to-AI workflows. Recent Audiovisual Media graduate (HdM Stuttgart).</p>
 
 <div class="links">
   <a class="btn primary" href="https://vimeo.com/1133149897?fl=pl&fe=sh" target="_blank" rel="noopener">Watch Reel</a>
@@ -33,32 +33,41 @@ title: Julian Brednich – VFX Portfolio
 
 <section id="lighting-tool" markdown="1">
 
-<p class="eyebrow">Bachelor Thesis · Houdini</p>
+<p class="eyebrow">Bachelor Thesis · Houdini · USD</p>
 
-## Procedural Lighting Tool
+## Automatic Light Rigs from HDRI + LiDAR
 
 <ul class="tags">
-  <li>Houdini</li><li>Python</li><li>VEX</li><li>COPs</li><li>LiDAR</li><li>HDRI</li>
+  <li>Houdini</li><li>Python</li><li>VEX</li><li>COPs</li><li>USD</li><li>LiDAR</li><li>HDRI</li>
 </ul>
 
-A procedural tool developed in Houdini using Python and VEX that automatically generates area lights from LiDAR scans and HDRI data.
-The tool analyzes LiDAR-based geometry, extracts local orientation, computes light dimensions, bakes texture projections, and constructs production-ready lights with correct transforms.
+**One on-set HDRI and one LiDAR scan in, a complete USD light rig out, fully automatically.** The tool finds every light source in the HDRI, places it in 3D using the LiDAR scan, gives it its own emission texture and exports the result as USD area lights plus a cleaned-up dome light. Rebuilding a set's lighting for CG integration, normally done by hand light by light, becomes a single automated step.
 
 <a class="media video" href="https://vimeo.com/1144911549?share=copy&fl=sv&fe=ci" target="_blank" rel="noopener">
-  <img src="assets/img/tool-thumb.jpg" alt="Light Rig Demo">
+  <img src="assets/img/tool-thumb.jpg" alt="HDRI of a studio test setup with 20 lights, one of the evaluation scenes">
   <span class="play" aria-hidden="true"></span>
   <span class="label">Demo video</span>
 </a>
 
-### How it works
+### Measured results
 
-1. Projects the HDRI onto the LiDAR geometry
-2. Finds light sources based on an artist-defined luminance threshold
-3. Deletes all geometry that is not part of the detected light sources
-4. Creates grid geometries representing area lights
-5. Extracts a 3×3 transform matrix, converts it into Euler rotations, and computes the light dimensions from the bounding boxes
-6. Automatically renders emission maps using COPs based on the projected texture
-7. Creates light nodes with the correct transform, size, and baked textures
+Evaluated in my thesis on 6 real studio setups with 61 lights (spotlights, softboxes, panels, tubes), each run with a high-resolution multi-position LiDAR scan and a quick single-position scan, against documented light plans.
+
+<div class="stats">
+  <div class="stat"><span class="value">96 %</span><span class="desc">of real lights detected (mean recall, ≥ 90 % in every setup)</span></div>
+  <div class="stat"><span class="value">≈ 3 cm</span><span class="desc">mean position error per axis with a high-res LiDAR scan</span></div>
+  <div class="stat"><span class="value">≤ 12 cm</span><span class="desc">mean error with a single 70-second scan, in line with published research (11–14 cm)</span></div>
+  <div class="stat"><span class="value">97 %</span><span class="desc">of lights painted out of the HDRI without artifacts</span></div>
+</div>
+
+### What it does
+
+- **Detects light sources** in the HDRI and merges fragments that belong to the same fixture.
+- **Places each light in 3D** from the LiDAR scan: position, orientation and size of the emitting surface.
+- **Bakes per-light emission textures** from the HDRI with COPs, so each area light carries the real shape and brightness distribution of its source.
+- **Paints the lights out of the HDRI**, leaving a clean environment for the dome light.
+- **Exports a USD light rig.** Tested in Maya: all area lights arrive with correct position and size (textures are relinked by hand).
+- **Works with a quick scan.** A single 70-second LiDAR pass from the camera position detects lights and bakes textures as well as a full multi-position scan, at somewhat lower position accuracy, so it costs almost no time on set.
 
 <details markdown="1">
 <summary>Show example code snippet (not full code)</summary>
