@@ -43,11 +43,9 @@ title: Julian Brednich – VFX Portfolio
 
 **One on-set HDRI and one LiDAR scan in, a complete USD light rig out, generated automatically with the artist in control of the threshold.** The tool finds every light source in the HDRI, places it in 3D using the LiDAR scan, gives it its own emission texture and exports the result as USD area lights plus a cleaned-up dome light. It automates the main steps of the IBL light-rig workflow in a single Houdini tool.
 
-<a class="media video" href="https://vimeo.com/1144911549?share=copy&fl=sv&fe=ci" target="_blank" rel="noopener">
-  <img src="assets/img/tool-thumb.jpg" alt="HDRI of a studio test setup with 20 lights, one of the evaluation scenes">
-  <span class="play" aria-hidden="true"></span>
-  <span class="label">Demo video</span>
-</a>
+<figure class="media">
+  <video src="assets/video/light-rig-demo.mp4" poster="assets/img/tool-thumb.jpg" controls playsinline preload="metadata"></video>
+</figure>
 
 ### Measured results
 
@@ -68,6 +66,8 @@ Evaluated in my thesis on 6 real studio setups with 61 lights (spotlights, softb
 - **Paints the lights out of the HDRI**, leaving a clean environment for the dome light.
 - **Exports a USD light rig.** Tested in Maya: all area lights arrive with correct position and size (textures are relinked by hand).
 - **Works with a quick scan.** A single 70-second LiDAR pass from the camera position detects lights and bakes textures as well as a full multi-position scan, at somewhat lower position accuracy, so it costs almost no time on set.
+
+<p><a class="btn" href="https://github.com/JulianBrednich/lidar-hdri-light-rig" target="_blank" rel="noopener">Code &amp; details on GitHub</a></p>
 
 <details markdown="1">
 <summary>Show example code snippet (not full code)</summary>
