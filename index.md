@@ -41,7 +41,7 @@ title: Julian Brednich – VFX Portfolio
   <li>Houdini</li><li>Python</li><li>VEX</li><li>COPs</li><li>USD</li><li>LiDAR</li><li>HDRI</li>
 </ul>
 
-**One on-set HDRI and one LiDAR scan in, a complete USD light rig out, fully automatically.** The tool finds every light source in the HDRI, places it in 3D using the LiDAR scan, gives it its own emission texture and exports the result as USD area lights plus a cleaned-up dome light. Rebuilding a set's lighting for CG integration, normally done by hand light by light, becomes a single automated step.
+**One on-set HDRI and one LiDAR scan in, a complete USD light rig out, generated automatically with the artist in control of the threshold.** The tool finds every light source in the HDRI, places it in 3D using the LiDAR scan, gives it its own emission texture and exports the result as USD area lights plus a cleaned-up dome light. It automates the main steps of the IBL light-rig workflow in a single Houdini tool.
 
 <a class="media video" href="https://vimeo.com/1144911549?share=copy&fl=sv&fe=ci" target="_blank" rel="noopener">
   <img src="assets/img/tool-thumb.jpg" alt="HDRI of a studio test setup with 20 lights, one of the evaluation scenes">
